@@ -5,8 +5,8 @@ This project consists of the following objectives:
 2. Perform transformations, grouping similar data together
 3. Lastly, load data in the appropriate format to a document-oriented database hosted on Docker
 
-Which represents an **E**xtract-**T**ransform-**L**oad (ETL) pipeline
-.
+Which represents an **E**xtract-**T**ransform-**L**oad (ETL) pipeline.
+
 #### Summary
 + Data file: [Kaggle | Marvel Superheroes: marvel_dc_characters.csv](https://www.kaggle.com/dannielr/marvel-superheroes?select=marvel_dc_characters.csv)
 + Choosen format: JSON
@@ -18,6 +18,7 @@ In order to replicate this solution it is required to set up the database first,
 > **Please note**: The following instructions assume you already have Docker and Python (3.8) installed
 
 <br>
+
 Start the services by running the following command:
 ```
 docker-compose up -d
