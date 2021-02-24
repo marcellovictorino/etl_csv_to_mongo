@@ -9,7 +9,7 @@ import pymongo.errors
 from pymongo import MongoClient
 
 # Workaround: loading .env at helper_functions import, before import Kaggle
-from project.utils.helper_functions import set_logger, silent_remove_file
+from src.project.utils.helper_functions import set_logger, silent_remove_file
 import kaggle
 
 
@@ -52,7 +52,7 @@ def extract_kaggle_single_file(dataset_name: str, file_name: str) -> pd.DataFram
         # Store raw copy
         today = dt.date.today()
 
-        raw_data_path = Path('.') / 'data' / '0_raw'
+        raw_data_path = Path(__file__).parent / 'data' / '0_raw'
         raw_data_file_path = raw_data_path / file_name.replace('.csv', f'_{str(today)}.csv')
 
         df.to_csv(raw_data_file_path, index=False)
