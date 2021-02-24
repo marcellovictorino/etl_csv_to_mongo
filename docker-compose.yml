@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  # Using root/admin as user/password credentials
+  mongodb:
+    image: mongo
+    container_name: mongo_db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+
+    volumes:
+      # Persist data even after container is closed
+      - mongodb_data:/data/db
+    networks:
+      - mongodb_network
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
+  mongo-gui:
+    image: mongo-express
+    container_name: mongo_gui
+    environment:
+    - ME_CONFIG_MONGODB_SERVER=mongodb
+    - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+    - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+    - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
+    - ME_CONFIG_BASICAUTH_USERNAME=admin
+    - ME_CONFIG_BASICAUTH_PASSWORD=admin
+    volumes:
+      - mongodb_data
+    depends_on:
+      - mongodb
+    networks:
+      - mongodb_network
+    ports:
+      - 8081:8081
+
+volumes:
+  mongodb_data:
+    name: mongodb_data
+networks:
+  mongodb_network:
+    name: mongodb_network
